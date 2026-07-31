@@ -19,6 +19,8 @@
  *   Boston, MA 02110-1301 USA.                                            *
  ***************************************************************************/
 
+#include "config.h"
+
 #include "cache.h"
 #include "output.h"
 
