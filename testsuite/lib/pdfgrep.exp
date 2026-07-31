@@ -277,6 +277,7 @@ set latex_post {\end{document}}
 proc mkpdf {name content} {
     global pdfdir latex_pre latex_post
     set fp [open "$pdfdir/$name.tex" w]
+    fconfigure $fp -encoding utf-8
     puts $fp $latex_pre
     puts $fp $content
     puts $fp $latex_post
