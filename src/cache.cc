@@ -32,7 +32,9 @@
 #include <iostream>
 #include <cstdlib>
 #include <unistd.h>
+#ifndef _WIN32
 #include <pwd.h>
+#endif
 #include <sys/stat.h>
 #include <cerrno>
 #include <cstring>
@@ -180,6 +182,7 @@ int find_cache_directory(std::string &dir)
 	if (cache_base != nullptr && cache_base[0] != '\0') {
 		dir += cache_base;
 	} else {
+		#ifndef _WIN32
 		char *home = getenv("HOME");
 		if (home == nullptr) {
 			struct passwd *passwd;
@@ -190,6 +193,12 @@ int find_cache_directory(std::string &dir)
 				return -1;
 			}
 		}
+		#else
+		char *home = getenv("USERPROFILE");
+		if (home == nullptr) {
+			return -1;
+		}
+		#endif
 		dir += home;
 		dir += "/.cache";
 	}
