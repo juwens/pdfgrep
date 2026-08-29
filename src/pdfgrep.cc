@@ -40,6 +40,7 @@
 #include <sstream>
 #include <fstream>
 #include <locale>
+#include <clocale>
 #include <gcrypt.h>
 
 #include <cpp/poppler-document.h>
@@ -361,7 +362,7 @@ static int do_search_in_directory(const Options &opts, const string &filename, R
 {
 	DIR *ptrDir = nullptr;
 
-	ptrDir = opendir(filename.c_str());
+	ptrDir = pdfgrep_gnulib::opendir(filename.c_str());
 	if (ptrDir == nullptr) {
 		err() << filename.c_str() << ": " << strerror(errno) << endl;
 		return 1;
@@ -370,7 +371,7 @@ static int do_search_in_directory(const Options &opts, const string &filename, R
 	while(true) {
 		string path(filename);
 		errno = 0;
-		struct dirent *ptrDirent = readdir(ptrDir);    //not sorted, in order as `ls -f`
+		struct dirent *ptrDirent = pdfgrep_gnulib::readdir(ptrDir);    //not sorted, in order as `ls -f`
 		if (ptrDirent == nullptr) {
 			break;
 		}
@@ -388,7 +389,7 @@ static int do_search_in_directory(const Options &opts, const string &filename, R
 		if (opts.recursive == Recursion::FOLLOW_SYMLINKS) {
 			statret = stat(path.c_str(), &st);
 		} else {
-			statret = lstat(path.c_str(), &st);
+			statret = pdfgrep_gnulib::lstat(path.c_str(), &st);
 		}
 
 		if (statret != 0) {
@@ -407,7 +408,7 @@ static int do_search_in_directory(const Options &opts, const string &filename, R
 		}
 	}
 
-	closedir(ptrDir);
+	pdfgrep_gnulib::closedir(ptrDir);
 
 	return 0;
 }
@@ -463,10 +464,18 @@ int main(int argc, char** argv)
 	Options options;
 	set_default_colors(options.outconf.colors);
 
+	// Set locale to user-preference. If this locale is an UTF-8 locale, the
+	// regex-functions regcomp/regexec become unicode aware, which means
+	// e.g. that '.' will match a unicode character, not a single byte.
+#if defined(__MINGW32__)
+	// MinGW libstdc++ cannot construct std::locale("") on Windows, even
+	// though the C runtime supports setlocale. The POSIX regex API uses the
+	// C locale, so set it directly.
+	if (std::setlocale(LC_ALL, "") == nullptr) {
+		err() << "Failed to set user locale. Falling back to default" << endl;
+	}
+#else
 	try {
-		// Set locale to user-preference. If this locale is an UTF-8 locale, the
-		// regex-functions regcomp/regexec become unicode aware, which means
-		// e.g. that '.' will match a unicode character, not a single byte.
 		locale::global(locale(""));
 	} catch (const runtime_error &e) {
 		// Fall back to the "C" locale.
@@ -474,6 +483,7 @@ int main(int argc, char** argv)
 		err() << "Failed to set user locale: \"" << e.what()
 		      << "\". Falling back to default" << endl;
 	}
+#endif
 
 	enum re_engine_type {
 		RE_POSIX = 0,

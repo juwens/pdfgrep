@@ -7,8 +7,11 @@ AC_USE_SYSTEM_EXTENSIONS
 
 AC_PROG_CXX
 AC_PROG_CC
+gl_EARLY
 AC_PROG_INSTALL
 AC_PROG_MAKE_SET
+
+gl_INIT
 
 dnl check for c++14 std
 AX_CXX_COMPILE_STDCXX(14, [noext], [mandatory])
@@ -18,6 +21,8 @@ AC_CHECK_HEADERS([stdlib.h string.h unistd.h getopt.h])
 AC_FUNC_MALLOC
 AC_FUNC_REALLOC
 AC_CHECK_FUNCS([regcomp])
+AS_CASE([$host_os],
+	[mingw*], [PKG_CHECK_MODULES([gnurx], [gnurx])])
 AC_CHECK_FUNCS([getopt_long])
 AC_CHECK_FUNCS([strcasestr])
 AC_CHECK_FUNCS([mkdir strdup strerror strstr strtoul])
@@ -161,6 +166,7 @@ AS_IF([test "x$enable_coverage" = "xyes"], [
 AM_CONDITIONAL([ENABLE_COV], test "x$enable_coverage" = "xyes")
 
 AC_CONFIG_FILES([Makefile
+	gl/Makefile
 	src/Makefile
 	completion/Makefile
 	doc/Makefile

@@ -35,3 +35,18 @@ doc/pdfgrep.html
 /src/*.gcno
 /compile_commands.json
 /.ccls-cache/
+
+# further ignores
+configure~
+config.h.in~
+config.sub
+config.sub~
+config.guess
+config.guess~
+confdefs.h
+conftest.*
+src/pdfgrep.exe
+gl
+m4/*
+!m4/m4_ax_cxx_compile_stdcxx.m4
+/.build-tmp.*

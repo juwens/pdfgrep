@@ -2,7 +2,7 @@ ACLOCAL_AMFLAGS = -I m4
 
 EXTRA_DIST=autogen.sh README.md CONTRIBUTING.md NEWS.md
 
-SUBDIRS = src completion doc testsuite
+SUBDIRS = gl src completion doc testsuite
 
 # This hack is needed to prevent autotools from emitting spurious warnings about
 # redefining .PHONY
