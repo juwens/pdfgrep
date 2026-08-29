@@ -203,7 +203,7 @@ int find_cache_directory(std::string &dir)
 		dir += "/.cache";
 	}
 	// according to xdg spec, all directories should be created as 0700.
-	if (mkdir(dir.c_str(), 0700) != 0 && errno != EEXIST) {
+	if (pdfgrep_gnulib::mkdir(dir.c_str(), 0700) != 0 && errno != EEXIST) {
 		char *msg = strerror(errno);
 		err() << "mkdir(" << dir << "): " << msg << endl;
 		return -1;
@@ -211,7 +211,7 @@ int find_cache_directory(std::string &dir)
 
 	dir += "/pdfgrep/";
 
-	if (mkdir(dir.c_str(), 0700) != 0 && errno != EEXIST) {
+	if (pdfgrep_gnulib::mkdir(dir.c_str(), 0700) != 0 && errno != EEXIST) {
 		char *msg = strerror(errno);
 		err() << "mkdir(" << dir << "): " << msg << endl;
 		return -1;

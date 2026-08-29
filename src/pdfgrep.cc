@@ -361,7 +361,7 @@ static int do_search_in_directory(const Options &opts, const string &filename, R
 {
 	DIR *ptrDir = nullptr;
 
-	ptrDir = opendir(filename.c_str());
+	ptrDir = pdfgrep_gnulib::opendir(filename.c_str());
 	if (ptrDir == nullptr) {
 		err() << filename.c_str() << ": " << strerror(errno) << endl;
 		return 1;
@@ -370,7 +370,7 @@ static int do_search_in_directory(const Options &opts, const string &filename, R
 	while(true) {
 		string path(filename);
 		errno = 0;
-		struct dirent *ptrDirent = readdir(ptrDir);    //not sorted, in order as `ls -f`
+		struct dirent *ptrDirent = pdfgrep_gnulib::readdir(ptrDir);    //not sorted, in order as `ls -f`
 		if (ptrDirent == nullptr) {
 			break;
 		}
@@ -388,7 +388,7 @@ static int do_search_in_directory(const Options &opts, const string &filename, R
 		if (opts.recursive == Recursion::FOLLOW_SYMLINKS) {
 			statret = stat(path.c_str(), &st);
 		} else {
-			statret = lstat(path.c_str(), &st);
+			statret = pdfgrep_gnulib::lstat(path.c_str(), &st);
 		}
 
 		if (statret != 0) {
@@ -407,7 +407,7 @@ static int do_search_in_directory(const Options &opts, const string &filename, R
 		}
 	}
 
-	closedir(ptrDir);
+	pdfgrep_gnulib::closedir(ptrDir);
 
 	return 0;
 }
