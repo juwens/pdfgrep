@@ -1,0 +1,41 @@
+# package|version|purpose
+#
+# Exact MSYS2 UCRT64 package inputs for build-windows-static.sh.  These are
+# verified before a build so that an upgraded SDK cannot silently alter a
+# released executable.  Pacman's normal dependency resolution may install
+# additional packages required by these inputs.
+autoconf-wrapper|20260320-1|Autoconf launcher
+automake-wrapper|20260320-1|Automake launcher
+curl|8.21.0-1|locked-source downloader
+git|2.55.0-1|Gnulib checkout helper
+libtool|2.6.2-1|Autotools support
+mingw-w64-ucrt-x86_64-brotli|1.2.0-1|Freetype dependency
+mingw-w64-ucrt-x86_64-bzip2|1.0.8-4|Freetype dependency
+mingw-w64-ucrt-x86_64-cmake|4.4.2-2|Poppler configurator
+mingw-w64-ucrt-x86_64-gcc|16.2.0-3|x86-64 UCRT compiler
+mingw-w64-ucrt-x86_64-gettext-runtime|1.0-1|static libintl
+mingw-w64-ucrt-x86_64-glib2|2.88.3-1|Harfbuzz static dependency
+mingw-w64-ucrt-x86_64-graphite2|1.3.15-1|Harfbuzz dependency
+mingw-w64-ucrt-x86_64-harfbuzz|14.4.0-1|font shaping
+mingw-w64-ucrt-x86_64-jbigkit|2.1-6|TIFF dependency
+mingw-w64-ucrt-x86_64-lcms2|2.19.1-1|colour profiles
+mingw-w64-ucrt-x86_64-lerc|4.1.1-1|TIFF dependency
+mingw-w64-ucrt-x86_64-libdeflate|1.26-1|PNG/TIFF dependency
+mingw-w64-ucrt-x86_64-libgcrypt|1.12.2-2|pdfgrep SHA support
+mingw-w64-ucrt-x86_64-libgpg-error|1.61-1|libgcrypt dependency
+mingw-w64-ucrt-x86_64-libiconv|1.19-1|static character conversion
+mingw-w64-ucrt-x86_64-libjpeg-turbo|3.2.0-1|JPEG support
+mingw-w64-ucrt-x86_64-libpng|1.6.58-1|PNG support
+mingw-w64-ucrt-x86_64-libsystre|1.0.2-2|TRE regular expressions
+mingw-w64-ucrt-x86_64-libtiff|4.7.2-1|TIFF support
+mingw-w64-ucrt-x86_64-libunistring|1.4.2-1|Gnulib dependency
+mingw-w64-ucrt-x86_64-libwebp|1.6.0-1|TIFF dependency
+mingw-w64-ucrt-x86_64-make|4.4.1-5|Autotools build
+mingw-w64-ucrt-x86_64-nasm|3.02-1|libjpeg-turbo tool
+mingw-w64-ucrt-x86_64-ninja|1.13.2-1|Poppler build
+mingw-w64-ucrt-x86_64-openjpeg2|2.5.4-2|JPEG 2000 support
+mingw-w64-ucrt-x86_64-pcre2|10.47-1|pdfgrep regex engine
+mingw-w64-ucrt-x86_64-pkgconf|1~3.0.5-1|static dependency discovery
+mingw-w64-ucrt-x86_64-xz|5.8.3-1|TIFF dependency
+mingw-w64-ucrt-x86_64-zlib|1.3.2-2|PDF/PNG compression
+mingw-w64-ucrt-x86_64-zstd|1.5.7-2|TIFF dependency

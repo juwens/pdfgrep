@@ -1,0 +1,7 @@
+# name|version|url|sha256
+#
+# The static Windows build verifies this source archive before unpacking it.
+# Its static UCRT64 library inputs are version-locked separately in
+# windows-static-sdk.lock; they are MSYS2 binary SDK packages, not sources
+# rebuilt by this build path.
+poppler|26.08.0|https://poppler.freedesktop.org/poppler-26.08.0.tar.xz|dc906e68cea698109706ac6aa3d2c9d4512fcfcac42d90b8afcda486d1b9abd0
